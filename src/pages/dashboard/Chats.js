@@ -1,20 +1,24 @@
+import React from "react";
 import {
   Box,
   IconButton,
-  Typography,
   Stack,
+  Typography,
+  styled,
+  alpha,
   InputBase,
   Button,
   Divider,
   Avatar,
   Badge,
+  useTheme,
 } from "@mui/material";
 import { ArchiveBox, CircleDashed, MagnifyingGlass } from "phosphor-react";
-import { styled, alpha, useTheme } from "@mui/material/styles";
-
 import { faker } from "@faker-js/faker";
-import React from "react";
 import { ChatList } from "../../data";
+
+import "./global.css";
+// import { SimpleBarStyle } from "../../components/Scrollbar" ;
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -49,6 +53,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
   const theme = useTheme();
   return (
     <Box
+      p={2}
       sx={{
         width: "100%",
         borderRadius: 1,
@@ -57,7 +62,6 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
             ? "#fff"
             : theme.palette.background.default,
       }}
-      p={2}
     >
       <Stack
         direction="row"
@@ -76,17 +80,17 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
           ) : (
             <Avatar src={faker.image.avatar()} />
           )}
-
           <Stack spacing={0.3}>
-            <Typography variant="subtitle2"> {name} </Typography>
+            <Typography variant="subtitle2"> {name}</Typography>
             <Typography variant="caption"> {msg} </Typography>
           </Stack>
-          <Stack spacing={2} alignItems="center">
-            <Typography sx={{ fontWeight: 600 }} variant="caption">
-              {time}
-            </Typography>
-            <Badge color="primary" badgeContent={unread}></Badge>
-          </Stack>
+        </Stack>
+
+        <Stack alignItems={"center"} spacing={2}>
+          <Typography sx={{ fontWeight: 600 }} variant="caption">
+            {time}
+          </Typography>
+          <Badge color="primary" badgeContent={unread}></Badge>
         </Stack>
       </Stack>
     </Box>
@@ -96,16 +100,16 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: 20,
-  backgroundColor: alpha(theme.palette.background.default, 1),
+  backgroundColor: alpha(theme.palette.background.paper, 1),
   marginRight: theme.spacing(2),
-  margingLeft: 0,
+  marginLeft: 0,
   width: "100%",
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
-  position: "absolute",
+  position: " absolute",
   pointerEvents: "none",
   display: "flex",
   alignItems: "center",
@@ -127,13 +131,12 @@ const Chats = () => {
     <Box
       sx={{
         position: "relative",
-
         width: 320,
         backgroundColor:
           theme.palette.mode === "light"
-            ? "#F8FAFF"
+            ? "#FBFAFF"
             : theme.palette.background.paper,
-        boxShadow: "0px 0px 2px rgba(0 ,0,0,0.25)",
+        boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
       }}
     >
       <Stack p={3} spacing={2} sx={{ height: "100vh" }}>
@@ -147,13 +150,13 @@ const Chats = () => {
             <CircleDashed />
           </IconButton>
         </Stack>
-        <Stack scx={{ width: "100%" }}>
+        <Stack sx={{ width: "100%" }}>
           <Search>
             <SearchIconWrapper>
-              <MagnifyingGlass color="#709CE6" />
+              <MagnifyingGlass color="#706ce6" />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search.."
+              placeholder="Search..."
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
@@ -161,24 +164,20 @@ const Chats = () => {
         <Stack spacing={1}>
           <Stack direction="row" alignItems={"center"} spacing={1.5}>
             <ArchiveBox size={24} />
-            <Button> Archive</Button>
+            <Button> Archive </Button>
           </Stack>
           <Divider />
         </Stack>
         <div className="scrollbar" style={{ overflowY: "auto" }}>
-          <Stack spacing={2} direction="column">
+          <Stack direction="column" spacing={2}>
             <Stack spacing={2.4}>
-              <Typography variant="subtitle2" sx={{ color: "676767" }}>
-                Pinned
-              </Typography>
+              <Typography variant="subtitle2">Pinned</Typography>
               {ChatList.filter((el) => el.pinned).map((el) => {
                 return <ChatElement {...el} />;
               })}
             </Stack>
             <Stack spacing={2.4}>
-              <Typography variant="subtitle2" sx={{ color: "676767" }}>
-                All Chats
-              </Typography>
+              <Typography variant="subtitle2">All Chats</Typography>
               {ChatList.filter((el) => !el.pinned).map((el) => {
                 return <ChatElement {...el} />;
               })}
