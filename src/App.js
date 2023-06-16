@@ -1,9 +1,11 @@
 // routes
 import Router from "./routes";
 // theme
-import ThemeProvider from './theme';
+import ThemeProvider from "./theme";
 // components
-import ThemeSettings from './components/settings';
+import ThemeSettings from "./components/settings";
+
+import "./pages/dashboard/global.css";
 
 function App() {
   return (
