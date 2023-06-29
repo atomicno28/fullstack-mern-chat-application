@@ -3,14 +3,18 @@ import {
   Divider,
   IconButton,
   Link,
+  Menu,
+  MenuItem,
   Stack,
   Typography,
   useTheme,
 } from "@mui/material";
-import { DownloadSimple, Image } from "phosphor-react";
+import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
 import React from "react";
+import { Message_options } from "../../data";
+import { useState } from "react";
 
-const DocMsg = ({ el }) => {
+const DocMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction="row" justifyContent={el.incoming ? "start" : "end"}>
@@ -49,11 +53,12 @@ const DocMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-const LinkMsg = ({ el }) => {
+const LinkMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction="row" justifyContent={el.incoming ? "start" : "end"}>
@@ -89,7 +94,7 @@ const LinkMsg = ({ el }) => {
                 sx={{ color: theme.palette.primary.main }}
                 to="https://leetcode.com/nikhillumesh/"
               >
-                www.github.com/atomicno28/chat_app
+                www.leetcode.com/nikhillumesh
               </Typography>
             </Stack>
             <Typography
@@ -101,11 +106,12 @@ const LinkMsg = ({ el }) => {
           </Stack>
         </Stack>
       </Box>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-const ReplyMsg = ({ el }) => {
+const ReplyMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction="row" justifyContent={el.incoming ? "start" : "end"}>
@@ -142,11 +148,12 @@ const ReplyMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-const MediaMsg = ({ el }) => {
+const MediaMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction="row" justifyContent={el.incoming ? "start" : "end"}>
@@ -174,11 +181,12 @@ const MediaMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
+      {menu && <MessageOptions />}
     </Stack>
   );
 };
 
-const TextMsg = ({ el }) => {
+const TextMsg = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack direction="row" justifyContent={el.incoming ? "start" : "end"}>
@@ -199,7 +207,46 @@ const TextMsg = ({ el }) => {
           {el.message}
         </Typography>
       </Box>
+      {menu && <MessageOptions />}
     </Stack>
+  );
+};
+
+const MessageOptions = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return (
+    <>
+      <DotsThreeVertical
+        id="basic-button"
+        aria-controls={open ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+        size={20}
+      />
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <Stack spacing={1} px={1}>
+          {Message_options.map((el) => (
+            <MenuItem onClick={handleClick}>{el.title}</MenuItem>
+          ))}
+        </Stack>
+      </Menu>
+    </>
   );
 };
 
