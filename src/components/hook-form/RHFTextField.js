@@ -4,7 +4,7 @@ import { useFormContext, Controller } from "react-hook-form";
 //@mui
 import { TextField } from "@mui/material";
 
-RHFTextField.protoTypes = {
+RHFTextField.propTypes = {
   name: PropTypes.string,
   helperText: PropTypes.node,
 };
