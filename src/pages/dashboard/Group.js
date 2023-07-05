@@ -40,7 +40,7 @@ const Group = () => {
                 ? "#F8FAFF"
                 : theme.palette.background.paper,
             width: 320,
-            boxShadow: "0 px 0 px 2px rgba(0,0,0,0.25)",
+            boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
           }}
         >
           <Stack p={3} spacing={2} sx={{ maxHeight: "100vh" }}>
