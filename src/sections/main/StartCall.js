@@ -13,6 +13,7 @@ import {
 } from "../../components/Search";
 import { MagnifyingGlass } from "phosphor-react";
 import { CallElement } from "../../components/CallElement";
+import { MembersList } from "../../data";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -32,19 +33,23 @@ const StartCall = ({ open, handleClose }) => {
       {/* TItle */}
       <DialogTitle sx={{ mb: 3 }}>Start Call</DialogTitle>
       <DialogContent>
-        <Stack sx={{ width: "100%" }}>
-          <Search>
-            <SearchIconWrapper>
-              <MagnifyingGlass color="#706ce6" />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search..."
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+        <Stack spacing={3}>
+          <Stack sx={{ width: "100%" }}>
+            <Search>
+              <SearchIconWrapper>
+                <MagnifyingGlass color="#706ce6" />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search..."
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </Stack>
+          {/* Call List  */}
+          {MembersList.map((el) => (
+            <CallElement {...el} />
+          ))}
         </Stack>
-        {/* Call List  */}
-        <CallElement />
       </DialogContent>
     </Dialog>
   );
