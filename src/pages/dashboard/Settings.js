@@ -21,6 +21,7 @@ import React from "react";
 import { faker } from "@faker-js/faker";
 import Shortcuts from "../../sections/settings/Shortcuts";
 import { useState } from "react";
+import "./global.css";
 
 const Settings = () => {
   const theme = useTheme();
