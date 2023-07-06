@@ -68,18 +68,19 @@ const Settings = () => {
     <>
       <Stack direction={"row"} sc={{ width: "100%" }}>
         {/* Left Panel */}
-        <div className="scrollbar" style={{ overflowY: "auto" }}>
-          <Box
-            sx={{
-              height: "100vh",
-              width: 320,
-              backgroundColor:
-                theme.palette.mode === "light"
-                  ? "#F8FAFF"
-                  : theme.palette.background,
-              boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
-            }}
-          >
+
+        <Box
+          sx={{
+            height: "100%",
+            width: 320,
+            backgroundColor:
+              theme.palette.mode === "light"
+                ? "#F8FAFF"
+                : theme.palette.background.paper,
+            boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
+          }}
+        >
+          <div className="scrollbar" style={{ overflowY: "auto" }}>
             <Stack p={4} spacing={5}>
               {/* Header */}
               <Stack direction="row" alignItems={"center"} spacing={3}>
@@ -107,24 +108,22 @@ const Settings = () => {
               {/* List of Options */}
               <Stack spacing={4}>
                 {list.map(({ key, icon, title, onclick }) => (
-                  <>
-                    <Stack
-                      sx={{ cursor: "pointer" }}
-                      spacing={2}
-                      onClick={onclick}
-                    >
-                      <Stack direction="row" spacing={2} alignItems="center">
-                        {icon}
-                        <Typography variant="body2">{title}</Typography>
-                      </Stack>
-                      {key !== 7 && <Divider />}
+                  <Stack
+                    sx={{ cursor: "pointer" }}
+                    spacing={2}
+                    onClick={onclick}
+                  >
+                    <Stack direction="row" spacing={2} alignItems="center">
+                      {icon}
+                      <Typography variant="body2">{title}</Typography>
                     </Stack>
-                  </>
+                    {key !== 7 && <Divider />}
+                  </Stack>
                 ))}
               </Stack>
             </Stack>
-          </Box>
-        </div>
+          </div>
+        </Box>
         {/* Right Panel */}
       </Stack>
       {openShortcuts && (

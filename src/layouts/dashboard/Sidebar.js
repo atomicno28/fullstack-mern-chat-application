@@ -16,9 +16,43 @@ import useSettings from "../../hooks/useSettings";
 import AntSwitch from "../../components/AntSwitch";
 import { faker } from "@faker-js/faker";
 import Logo from "../../assets/Images/logo.ico";
+import { useNavigate } from "react-router-dom";
+
+const getPath = (index) => {
+  switch (index) {
+    case 0:
+      return "/app";
+    case 1:
+      return "/group";
+    case 2:
+      return "/call";
+    case 3:
+      return "/settings";
+    default:
+      break;
+  }
+};
+
+const getMenuPath = (index) => {
+  switch (index) {
+    case 0:
+      return "/profile";
+    case 1:
+      return "/settings";
+    case 2:
+      // ToDo => update token and setAuth to false.
+      return "/auth/login";
+    default:
+      break;
+  }
+};
 
 const Sidebar = () => {
   const theme = useTheme();
+
+  // Using 'useNavigate' hooks.
+  const navigate = useNavigate();
+
   const [selected, setSelected] = useState(0);
 
   // use setting is custom hook.
@@ -87,7 +121,11 @@ const Sidebar = () => {
                 </Box>
               ) : (
                 <IconButton
-                  onClick={() => setSelected(el.index)}
+                  onClick={() => {
+                    // Adding Navigation.
+                    setSelected(el.index);
+                    navigate(getPath(el.index));
+                  }}
                   sx={{
                     width: "max-content",
                     color:
@@ -123,7 +161,10 @@ const Sidebar = () => {
                       ? "#000"
                       : theme.palette.text.primary,
                 }}
-                onClick={() => setSelected(3)}
+                onClick={() => {
+                  setSelected(3);
+                  navigate(getPath(3));
+                }}
               >
                 <Gear />
               </IconButton>
@@ -163,9 +204,16 @@ const Sidebar = () => {
             }}
           >
             <Stack spacing={1} px={1}>
-              {Profile_Menu.map((el) => (
-                <MenuItem onClick={handleClick}>
+              {Profile_Menu.map((el, idx) => (
+                <MenuItem
+                  onClick={() => {
+                    handleClick();
+                  }}
+                >
                   <Stack
+                    onClick={() => {
+                      navigate(getMenuPath(idx));
+                    }}
                     sx={{ width: 100 }}
                     direction="row"
                     alignItems="center"
