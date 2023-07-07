@@ -69,18 +69,18 @@ const Settings = () => {
       <Stack direction={"row"} sc={{ width: "100%" }}>
         {/* Left Panel */}
 
-        <Box
-          sx={{
-            height: "100%",
-            width: 320,
-            backgroundColor:
-              theme.palette.mode === "light"
-                ? "#F8FAFF"
-                : theme.palette.background.paper,
-            boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
-          }}
-        >
-          <div className="scrollbar" style={{ overflowY: "auto" }}>
+        <div className="scrollbar" style={{ overflowY: "auto" }}>
+          <Box
+            sx={{
+              height: "100%",
+              width: 320,
+              backgroundColor:
+                theme.palette.mode === "light"
+                  ? "#F8FAFF"
+                  : theme.palette.background.paper,
+              boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
+            }}
+          >
             <Stack p={4} spacing={5}>
               {/* Header */}
               <Stack direction="row" alignItems={"center"} spacing={3}>
@@ -122,8 +122,8 @@ const Settings = () => {
                 ))}
               </Stack>
             </Stack>
-          </div>
-        </Box>
+          </Box>
+        </div>
         {/* Right Panel */}
       </Stack>
       {openShortcuts && (
